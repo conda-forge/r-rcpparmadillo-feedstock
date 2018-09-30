@@ -1,5 +1,4 @@
-{% set version = '0.8.500.0' %}
-
+{% set version = '0.9.100.5.0' %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -10,13 +9,13 @@ package:
 source:
   fn: RcppArmadillo_{{ version }}.tar.gz
   url:
-    - https://cran.r-project.org/src/contrib/RcppArmadillo_{{ version }}.tar.gz
-    - https://cran.r-project.org/src/contrib/Archive/RcppArmadillo/RcppArmadillo_{{ version }}.tar.gz
-  sha256: 516f24f16e4bf8f3b8acd4621390daf2d1fe48f22f5a40aa29abda687a3303ea
+    - {{ cran_mirror }}/src/contrib/RcppArmadillo_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/RcppArmadillo/RcppArmadillo_{{ version }}.tar.gz
+  sha256: 810a7750ba64f0538a1e6e62a8d8e956ca006ac8077e4a67ee36dc281dc4d2c7
 
 build:
   merge_build_host: True  # [win]
-  number: 1
+  number: 0
   skip: true  # [win32]
   rpaths:
     - lib/R/lib/
@@ -24,35 +23,56 @@ build:
 
 requirements:
   build:
-    - posix                # [win]
-    - {{ compiler('c') }}        # [unix]
-    - {{ compiler('m2w64_c') }}  # [win]
-    - {{ compiler('cxx') }}        # [unix]
-    - {{ compiler('m2w64_cxx') }}  # [win]
+    - {{ compiler('c') }}        # [not win]
+    - {{ compiler('cxx') }}      # [not win]
+    - {{native}}toolchain        # [win]
+    - {{posix}}filesystem        # [win]
+    - {{posix}}sed               # [win]
+    - {{posix}}grep              # [win]
+    - {{posix}}autoconf
+    - {{posix}}automake          # [not win]
+    - {{posix}}automake-wrapper  # [win]
+    - {{posix}}pkg-config
+    - {{posix}}make
+    - {{posix}}coreutils         # [win]
+    - {{posix}}zip               # [win]
   host:
     - r-base
     - r-rcpp >=0.11.0
-
   run:
     - r-base
+    - {{native}}gcc-libs         # [win]
     - r-rcpp >=0.11.0
 
 test:
   commands:
-    - $R -e "library('RcppArmadillo')"  # [not win]
+    - $R -e "library('RcppArmadillo')"           # [not win]
     - "\"%R%\" -e \"library('RcppArmadillo')\""  # [win]
 
 about:
   home: http://dirk.eddelbuettel.com/code/rcpp.armadillo.html
   license: GPL (>= 2)
-  summary: Armadillo is a templated C++ linear algebra library that
+  summary: '''Armadillo'' is a templated C++ linear algebra library (by Conrad Sanderson) that
     aims towards a good balance between speed and ease of use. Integer, floating point
     and complex numbers are supported, as well as a subset of trigonometric and statistics
     functions. Various matrix decompositions are provided through optional integration
-    with LAPACK and ATLAS libraries.
+    with LAPACK and ATLAS libraries. The ''RcppArmadillo'' package includes the header
+    files from the templated ''Armadillo'' library. Thus users do not need to install
+    ''Armadillo'' itself in order to use ''RcppArmadillo''. From release 7.800.0 on,
+    ''Armadillo'' is licensed under Apache License 2; previous releases were under licensed
+    as MPL 2.0 from version 3.800.0 onwards and LGPL-3 prior to that; ''RcppArmadillo''
+    (the ''Rcpp'' bindings/bridge to Armadillo) is licensed under the GNU GPL version
+    2 or later, as is the rest of ''Rcpp''. Note that Armadillo requires a fairly recent
+    compiler; for the g++ family at least version 4.6.* is required. '
   license_family: GPL3
+  license_file: '{{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3'  # [unix]
+  license_file: '{{ environ["PREFIX"] }}\R\share\licenses\GPL-3'  # [win]
 
 extra:
   recipe-maintainers:
     - johanneskoester
     - bgruening
+    - daler
+    - jdblischak
+    - cbrueffer
+    - dbast
