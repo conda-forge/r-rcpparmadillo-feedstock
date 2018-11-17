@@ -15,7 +15,7 @@ source:
 
 build:
   merge_build_host: True  # [win]
-  number: 0
+  number: 1000
   skip: true  # [win32]
   rpaths:
     - lib/R/lib/
@@ -36,6 +36,7 @@ requirements:
     - {{posix}}make
     - {{posix}}coreutils         # [win]
     - {{posix}}zip               # [win]
+    - llvm-openmp                # [osx]
   host:
     - r-base
     - r-rcpp >=0.11.0
@@ -43,6 +44,7 @@ requirements:
     - r-base
     - {{native}}gcc-libs         # [win]
     - r-rcpp >=0.11.0
+    - llvm-openmp                # [osx]
 
 test:
   commands:
@@ -65,8 +67,7 @@ about:
     2 or later, as is the rest of ''Rcpp''. Note that Armadillo requires a fairly recent
     compiler; for the g++ family at least version 4.6.* is required. '
   license_family: GPL3
-  license_file: '{{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3'  # [unix]
-  license_file: '{{ environ["PREFIX"] }}\R\share\licenses\GPL-3'  # [win]
+  license_file: '{{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3'
 
 extra:
   recipe-maintainers:
