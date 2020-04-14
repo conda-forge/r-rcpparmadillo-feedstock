@@ -1,4 +1,4 @@
-{% set version = "0.9.850.1.0" %}
+{% set version = "0.9.860.2.0" %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -10,11 +10,11 @@ source:
   url:
     - {{ cran_mirror }}/src/contrib/RcppArmadillo_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/RcppArmadillo/RcppArmadillo_{{ version }}.tar.gz
-  sha256: 9fcb28335e94c308dc5cd8c348a7a02c4b7bea11a87498e121f072be2aa42c61
+  sha256: 65dd433394b7a6d32f9c6b22f1ddbe612e96ad285882203d4b0dedf5c154e9e5
 
 build:
-  merge_build_host: True  # [win]
-  number: 1
+  merge_build_host: true  # [win]
+  number: 0
   rpaths:
     - lib/R/lib/
     - lib/
@@ -55,21 +55,16 @@ test:
 about:
   home: http://dirk.eddelbuettel.com/code/rcpp.armadillo.html
   license: GPL-2
-  summary: '''Armadillo'' is a templated C++ linear algebra library (by Conrad Sanderson) that
-    aims towards a good balance between speed and ease of use. Integer, floating point
-    and complex numbers are supported, as well as a subset of trigonometric and statistics
-    functions. Various matrix decompositions are provided through optional integration
-    with LAPACK and ATLAS libraries. The ''RcppArmadillo'' package includes the header
-    files from the templated ''Armadillo'' library. Thus users do not need to install
-    ''Armadillo'' itself in order to use ''RcppArmadillo''. From release 7.800.0 on,
-    ''Armadillo'' is licensed under Apache License 2; previous releases were under licensed
-    as MPL 2.0 from version 3.800.0 onwards and LGPL-3 prior to that; ''RcppArmadillo''
-    (the ''Rcpp'' bindings/bridge to Armadillo) is licensed under the GNU GPL version
-    2 or later, as is the rest of ''Rcpp''. Note that Armadillo requires a fairly recent
-    compiler; for the g++ family at least version 4.6.* is required. '
+  summary: "'Armadillo' is a templated C++ linear algebra library (by Conrad Sanderson) that aims towards a good balance between speed and ease of use. Integer, floating\
+    \ point and complex numbers are supported, as well as a subset of trigonometric and statistics functions. Various matrix decompositions are provided through optional\
+    \ integration with LAPACK and ATLAS libraries. The 'RcppArmadillo' package includes the header files from the templated 'Armadillo' library. Thus users do not\
+    \ need to install 'Armadillo' itself in order to use 'RcppArmadillo'. From release 7.800.0 on, 'Armadillo' is licensed under Apache License 2; previous releases\
+    \ were under licensed as MPL 2.0 from version 3.800.0 onwards and LGPL-3 prior to that; 'RcppArmadillo' (the 'Rcpp' bindings/bridge to Armadillo) is licensed\
+    \ under the GNU GPL version 2 or later, as is the rest of 'Rcpp'. Note that Armadillo requires a fairly recent compiler; for the g++ family at least version 4.6.*\
+    \ is required. "
   license_family: GPL2
   license_file:
-    - '{{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-2'
+    - {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-2
 
 extra:
   recipe-maintainers:
