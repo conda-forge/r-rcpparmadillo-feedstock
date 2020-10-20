@@ -3,7 +3,7 @@ About r-rcpparmadillo
 
 Home: http://dirk.eddelbuettel.com/code/rcpp.armadillo.html
 
-Package license: GPL-2
+Package license: GPL-2.0-or-later
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/r-rcpparmadillo-feedstock/blob/master/LICENSE.txt)
 
