@@ -24,7 +24,6 @@ jobs:
         CONFIG: linux_ppc64le_r_base4.0target_platformlinux-ppc64le
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: condaforge/linux-anvil-ppc64le
-    maxParallel: 8
   timeoutInMinutes: 360
 
   steps:
