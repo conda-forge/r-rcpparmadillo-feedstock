@@ -44,6 +44,8 @@ requirements:
     - r-rcpp >=0.11.0
     - libblas
     - liblapack
+    - libgomp                      # [linux]
+    - llvm-openmp                  # [osx]
   run:
     - r-base
     - {{ native }}gcc-libs         # [win]
