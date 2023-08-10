@@ -3,6 +3,7 @@ About r-rcpparmadillo-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/r-rcpparmadillo-feedstock/blob/main/LICENSE.txt)
 
+
 About r-rcpparmadillo
 ---------------------
 
@@ -13,6 +14,7 @@ Package license: GPL-2.0-or-later
 Summary: 'Armadillo' is a templated C++ linear algebra library (by Conrad Sanderson) that aims towards a good balance between speed and ease of use. Integer, floating point and complex numbers are supported, as well as a subset of trigonometric and statistics functions. Various matrix decompositions are provided through optional integration with LAPACK and ATLAS libraries. The 'RcppArmadillo' package includes the header files from the templated 'Armadillo' library. Thus users do not need to install 'Armadillo' itself in order to use 'RcppArmadillo'. From release 7.800.0 on, 'Armadillo' is licensed under Apache License 2; previous releases were under licensed as MPL 2.0 from version 3.800.0 onwards and LGPL-3 prior to that; 'RcppArmadillo' (the 'Rcpp' bindings/bridge to Armadillo) is licensed under the GNU GPL version 2 or later, as is the rest of 'Rcpp'. Note that Armadillo requires a fairly recent compiler; for the g++ family at least version 4.6.* is required. 
 
 Development: https://github.com/RcppCore/RcppArmadillo
+
 About r-rcpparmadillo
 ---------------------
 
