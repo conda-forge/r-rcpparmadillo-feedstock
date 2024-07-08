@@ -1,4 +1,4 @@
-{% set version = "0.12.8.4.0" %}
+{% set version = "14.0.0-1" %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -10,7 +10,7 @@ source:
   url:
     - {{ cran_mirror }}/src/contrib/RcppArmadillo_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/RcppArmadillo/RcppArmadillo_{{ version }}.tar.gz
-  sha256: cabf6865073204c184ddad4dec1f30aae1b8020b4c9d6e74d1a6b0baaef03046
+  sha256: 80c4d4fadc3ed92712affc50279de4c5f2e1f7ee777ad1f1b3f9f3e94a64ba90
 
 build:
   merge_build_host: true  # [win]
