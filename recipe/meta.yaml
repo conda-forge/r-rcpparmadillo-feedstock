@@ -1,6 +1,5 @@
 {% set version = "14.0.0-1" %}
 {% set posix = 'm2-' if win else '' %}
-{% set native = 'm2w64-' if win else '' %}
 
 package:
   name: r-rcpparmadillo
@@ -13,12 +12,12 @@ source:
   sha256: 80c4d4fadc3ed92712affc50279de4c5f2e1f7ee777ad1f1b3f9f3e94a64ba90
 
 build:
-  merge_build_host: true  # [win]
-  number: 0
+  number: 1
   rpaths:
     - lib/R/lib/
     - lib/
-  skip: true  # [win]
+  # Checking windows to see if it passes. Uncomment the line if it fails.
+  # skip: true  # [win]
 
 requirements:
   build:
@@ -49,7 +48,6 @@ requirements:
     - liblapack
   run:
     - r-base
-    - {{ native }}gcc-libs         # [win]
     - r-rcpp >=0.11.0
 
 test:
