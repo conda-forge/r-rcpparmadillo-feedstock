@@ -12,12 +12,10 @@ source:
   sha256: 80c4d4fadc3ed92712affc50279de4c5f2e1f7ee777ad1f1b3f9f3e94a64ba90
 
 build:
-  number: 1
+  number: 2
   rpaths:
     - lib/R/lib/
     - lib/
-  # Checking windows to see if it passes. Uncomment the line if it fails.
-  # skip: true  # [win]
 
 requirements:
   build:
@@ -35,7 +33,7 @@ requirements:
     - {{ posix }}autoconf
     - {{ posix }}automake          # [not win]
     - {{ posix }}automake-wrapper  # [win]
-    - {{ posix }}pkg-config
+    - pkg-config
     - {{ posix }}make
     - {{ posix }}coreutils         # [win]
     - {{ posix }}zip               # [win]
@@ -46,6 +44,8 @@ requirements:
     - r-rcpp >=0.11.0
     - libblas
     - liblapack
+    - libgomp                      # [linux]
+    - llvm-openmp                  # [osx]
   run:
     - r-base
     - r-rcpp >=0.11.0
