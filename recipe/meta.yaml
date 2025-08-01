@@ -1,4 +1,4 @@
-{% set version = "14.4.2-1" %}
+{% set version = "14.6.0-1" %}
 {% set posix = 'm2-' if win else '' %}
 
 package:
@@ -9,13 +9,17 @@ source:
   url:
     - {{ cran_mirror }}/src/contrib/RcppArmadillo_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/RcppArmadillo/RcppArmadillo_{{ version }}.tar.gz
-  sha256: 1d19d69a9931e7843e95645157ea2600725916f57f0a0f2a050fcdf17b39c0b4
+  sha256: 1a2e6e2bfd117e93a6f89cf35fddd072a0ceb032c5022d6b5822a25796df2f9e
 
 build:
   number: 0
   rpaths:
     - lib/R/lib/
     - lib/
+  missing_dso_whitelist:
+    - '*/R.dll'        # [win]
+    - '*/Rblas.dll'    # [win]
+    - '*/Rlapack.dll'  # [win]
 
 requirements:
   build:
@@ -27,6 +31,7 @@ requirements:
     - {{ stdlib("m2w64_c") }}      # [win]
     - {{ compiler('cxx') }}        # [not win]
     - {{ compiler('m2w64_cxx') }}  # [win]
+    - {{ compiler('fortran') }}    # [osx and arm64]
     - {{ posix }}filesystem        # [win]
     - {{ posix }}sed               # [win]
     - {{ posix }}grep              # [win]
@@ -44,11 +49,11 @@ requirements:
     - r-rcpp >=0.11.0
     - libblas
     - liblapack
-    - libgomp                      # [linux]
     - llvm-openmp                  # [osx]
   run:
     - r-base
     - r-rcpp >=0.11.0
+    - llvm-openmp                  # [osx]
 
 test:
   commands:
