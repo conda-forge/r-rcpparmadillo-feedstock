@@ -1,4 +1,4 @@
-{% set version = "15.0.2-2" %}
+{% set version = "15.2.2-1" %}
 {% set posix = 'm2-' if win else '' %}
 
 package:
@@ -9,7 +9,7 @@ source:
   url:
     - {{ cran_mirror }}/src/contrib/RcppArmadillo_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/RcppArmadillo/RcppArmadillo_{{ version }}.tar.gz
-  sha256: f8895e85d70ddeabb1d4ec7567f81ed6fd95f9e8715d0791afd07c8382315f4e
+  sha256: 9282d5448d699403d535ab3c64b10421aa89c79f4ea291b6a585cdd5b49a54ea
 
 build:
   number: 0
