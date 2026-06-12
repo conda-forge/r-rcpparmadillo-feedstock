@@ -31,7 +31,8 @@ requirements:
     - {{ stdlib("m2w64_c") }}      # [win]
     - {{ compiler('cxx') }}        # [not win]
     - {{ compiler('m2w64_cxx') }}  # [win]
-    - {{ compiler('fortran') }}    # [osx and arm64]
+    - {{ compiler('fortran') }}    # [osx]
+    - {{ compiler('m2w64_fortran') }}  # [win]
     - {{ posix }}filesystem        # [win]
     - {{ posix }}sed               # [win]
     - {{ posix }}grep              # [win]
@@ -59,10 +60,9 @@ test:
   requires:
     - r-tinytest
     - r-matrix
-    - r-reticulate
-    - python
-    - scipy
-    - make  # [win]
+    - {{ compiler('m2w64_c') }}    # [win]
+    - {{ compiler('m2w64_cxx') }}  # [win]
+    - {{ posix }}make              # [win]
   source_files:
     - tests/
   commands:
