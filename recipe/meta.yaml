@@ -58,6 +58,11 @@ requirements:
 test:
   requires:
     - r-tinytest
+    - r-matrix
+    - r-reticulate
+    - python
+    - scipy
+    - make  # [win]
   source_files:
     - tests/
   commands:
