@@ -12,7 +12,7 @@ source:
   sha256: f7a20f66b1364b596b632a57adbe932910d48a3bc158a4e550d7eed00147966e
 
 build:
-  number: 0
+  number: 1
   rpaths:
     - lib/R/lib/
     - lib/
@@ -31,7 +31,6 @@ requirements:
     - {{ stdlib("m2w64_c") }}      # [win]
     - {{ compiler('cxx') }}        # [not win]
     - {{ compiler('m2w64_cxx') }}  # [win]
-    - {{ compiler('fortran') }}    # [osx and arm64]
     - {{ posix }}filesystem        # [win]
     - {{ posix }}sed               # [win]
     - {{ posix }}grep              # [win]
@@ -42,7 +41,7 @@ requirements:
     - {{ posix }}make
     - {{ posix }}coreutils         # [win]
     - {{ posix }}zip               # [win]
-    - libgomp                      # [linux]
+    - libgomp                      # [not osx]
     - llvm-openmp                  # [osx]
   host:
     - r-base
@@ -56,9 +55,19 @@ requirements:
     - llvm-openmp                  # [osx]
 
 test:
+  requires:
+    - r-tinytest
+    - r-matrix
+    - {{ compiler('m2w64_c') }}    # [win]
+    - {{ compiler('m2w64_cxx') }}  # [win]
+    - {{ posix }}make              # [win]
+  source_files:
+    - tests/
   commands:
     - $R -e "library('RcppArmadillo')"           # [not win]
+    - $R -f "tests/tinytest.R"                   # [not win]
     - "\"%R%\" -e \"library('RcppArmadillo')\""  # [win]
+    - "\"%R%\" -f \"tests/tinytest.R\""          # [win]
 
 about:
   home: https://dirk.eddelbuettel.com/code/rcpp.armadillo.html
